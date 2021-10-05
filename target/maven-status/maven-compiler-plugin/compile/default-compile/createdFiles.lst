@@ -1,6 +1,0 @@
-com/addressbook/exception/ServiceException.class
-com/addressbook/service/ContactService.class
-com/addressbook/util/Constants.class
-com/addressbook/AddressBookApplication.class
-com/addressbook/model/Contact.class
-com/addressbook/rest/AddressBookRestController.class

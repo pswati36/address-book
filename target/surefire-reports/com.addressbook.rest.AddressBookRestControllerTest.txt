@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.addressbook.rest.AddressBookRestControllerTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.808 s - in com.addressbook.rest.AddressBookRestControllerTest
