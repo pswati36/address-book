@@ -43,8 +43,9 @@ http://${host}:${serverPort}/swagger-ui/index.html
 
 Dockerfile committed has all steps including health check. Please update serverPort accordingly.
 
-Please run below command (update repository details as per your need)
-docker build -t springio/gs-spring-boot-docker .
-docker run -p 8989:8989 -e serverPort=8989 springio/gs-spring-boot-docker 
+Please run below command (update repository and port details as per your requirements)
+
+# docker build -t springio/gs-spring-boot-docker .
+# docker run -p 8989:8989 -e serverPort=8989 springio/gs-spring-boot-docker 
 
 
