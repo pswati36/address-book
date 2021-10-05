@@ -24,7 +24,7 @@ mvn test
 
 # Junit for Service layer
 
-Refer ContactServiceTest class
+mvn -Dtest=ContactServiceTest test
 
 # Start
 mvn springboot:run
