@@ -95,9 +95,40 @@ public class ContactServiceTest {
         contact = contactService.addContactToAddressBook(Constants.DEFAULT_ADDRESS_BOOK,contact);
         Assertions.assertNotNull(contact);
 
+        contact = new Contact("Jack Sparrow", Arrays.asList("9090909090"));
+        contact = contactService.addContactToAddressBook(TEST_ADDRESS_BOOK,contact);
+        Assertions.assertNotNull(contact);
+
         // Fetch Contact by address book
         List<Contact> defaultAddressBookUniqueContacts = contactService.fetchAllUniqueContacts();
         Assertions.assertEquals(3,defaultAddressBookUniqueContacts.size());
 
+    }
+
+    @Test
+    @Order(8)
+    void test_fetch_all_unique_contacts_by_address_book(){
+
+        Contact contact = new Contact("Mythili", Arrays.asList("014996789"));
+        contact = contactService.addContactToAddressBook(Constants.DEFAULT_ADDRESS_BOOK,contact);
+        Assertions.assertNotNull(contact);
+
+        contact = new Contact("Jack Sparrow", Arrays.asList("9090909090"));
+        contact = contactService.addContactToAddressBook(Constants.DEFAULT_ADDRESS_BOOK,contact);
+        Assertions.assertNotNull(contact);
+
+        // Fetch Contact by address book
+        List<Contact> defaultAddressBookUniqueContacts = contactService.fetchAllUniqueContactByAddressBook(Constants.DEFAULT_ADDRESS_BOOK);
+        Assertions.assertEquals(3,defaultAddressBookUniqueContacts.size());
+
+        defaultAddressBookUniqueContacts = contactService.fetchAllContactByAddressBook(Constants.DEFAULT_ADDRESS_BOOK);
+        Assertions.assertEquals(5,defaultAddressBookUniqueContacts.size());
+
+    }
+
+    @Test
+    @Order(9)
+    void test_remove_invalid_address_book_id(){
+        Assertions.assertThrows(ServiceException.class,()->contactService.fetchAllUniqueContactByAddressBook(TEST_ADDRESS_BOOK_NA));
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.FluxExchangeResult;
@@ -68,6 +69,15 @@ public class AddressBookRestControllerTest {
 
         Assertions.assertNotNull(removedResult.getResponseBody().getId());
         Assertions.assertEquals(fetchedContact.getId(),removedResult.getResponseBody().getId());
+
+        result = this.webTestClient.get()
+                .uri(Constants.addressBookMapping+"/addressBookId/"+Constants.DEFAULT_ADDRESS_BOOK+"/contacts?unique=true")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectBodyList(Contact.class)
+                .returnResult();
+
+        Assertions.assertEquals(0,result.getResponseBody().size());
     }
 
     @Test
@@ -114,6 +124,27 @@ public class AddressBookRestControllerTest {
         Assertions.assertNotNull(result.getResponseBody());
         Assertions.assertEquals(2,result.getResponseBody().size());
 
+    }
+
+    @Test
+    @Order(4)
+    public void test_addContactToAddressBook_invalid_data(){
+        Contact contact = new Contact("", Arrays.asList("9090909090"));
+        this.webTestClient.post()
+                .uri(Constants.addressBookMapping+"/addressBookId/"+TEST_ADDRESS_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(contact))
+                .exchange().expectStatus().isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    @Order(5)
+    public void test_addContactToAddressBook_invalid_address_book(){
+        this.webTestClient.get()
+                .uri(Constants.addressBookMapping+"/addressBookId/"+TEST_ADDRESS_BOOK_NA+"/contacts?unique=true")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange().expectStatus().isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

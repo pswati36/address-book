@@ -51,6 +51,13 @@ public class ContactService {
         return addressBooks.get(addressBookId);
     }
 
+    public List<Contact> fetchAllUniqueContactByAddressBook(String addressBookId){
+        if (!addressBooks.containsKey(addressBookId)) {
+            throw new ServiceException("AddressBook with the given Id does not exist");
+        }
+        return addressBooks.get(addressBookId).stream().distinct().collect(Collectors.toList());
+    }
+
     public List<Contact> fetchAllContacts(){
         List<Contact> contacts = new ArrayList<>();
         addressBooks.values().forEach(contacts::addAll);
