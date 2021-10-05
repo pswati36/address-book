@@ -23,17 +23,17 @@ Further Improvement:
 How to use:
 
 # Build
-mvn clean install
+**mvn clean install**
 
 # Integration Test
-mvn test
+**mvn test**
 
 # Junit for Service layer
 
-mvn -Dtest=ContactServiceTest test
+**mvn -Dtest=ContactServiceTest test**
 
 # Start
-mvn springboot:run
+**mvn springboot:run**
 
 Once run refer to below url for API documentation.
 
@@ -45,7 +45,7 @@ Dockerfile committed has all steps including health check. Please update serverP
 
 Please run below command (update repository and port details as per your requirements)
 
-# docker build -t springio/gs-spring-boot-docker .
-# docker run -p 8989:8989 -e serverPort=8989 springio/gs-spring-boot-docker 
+**1. docker build -t springio/gs-spring-boot-docker .** <br/>
+**2. docker run -p 8989:8989 -e serverPort=8989 springio/gs-spring-boot-docker**
 
 
