@@ -12,7 +12,7 @@ APIs Available for below features:
 Note: 
 
 1. Address book will be created automatically if given address book id is not exists while contact creation.
-2. 
+2. Contact will be considered as same if name and all phone numbers matches.
 
 How to use:
 
